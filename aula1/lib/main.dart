@@ -86,6 +86,8 @@ class _HomeState extends State<Home> //Classe que representa o estado
                   labelText: "Peso(kg)",
                   labelStyle: TextStyle(color: Colors.green, fontSize: 25.0),
                 ),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.green),
                 controller: _pesoController,
                 validator: (value){
                   if(value == null || value.isEmpty){
@@ -97,10 +99,10 @@ class _HomeState extends State<Home> //Classe que representa o estado
                 keyboardType: TextInputType.number,
                 decoration:InputDecoration(
                   labelText: "Altura(cm)",
-                  labelStyle: TextStyle(color: Colors.green),
+                  labelStyle: TextStyle(color: Colors.green, fontSize: 25.0),
                 ),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.green, fontSize:25.0),
+                style: TextStyle(color: Colors.green),
                 controller: _alturaController,
                 validator:(value){
                   if(value == null || value.isEmpty){
@@ -121,12 +123,18 @@ class _HomeState extends State<Home> //Classe que representa o estado
                     },
                     child: Text(
                       "Calcular",
-                      style: TextStyle(color: Colors.white, fontSize:25.0),
+                      style: TextStyle(color: Colors.white, fontSize: 25.0),
                     ),
                     style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   ),
+              
                 ),
-              )
+              ),
+              Text(
+                _resultado,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.green, fontSize: 25.0),
+              ),
             ],
           )
         )
