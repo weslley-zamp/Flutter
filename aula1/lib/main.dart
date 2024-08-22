@@ -93,6 +93,13 @@ class _HomeState extends State<Home> //Classe que representa o estado
                   }
                 },
               ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                decoration:InputDecoration(
+                  labelText: "Altura(cm)",
+                  
+                ),
+              ),
             ],
           )
         )
