@@ -97,9 +97,36 @@ class _HomeState extends State<Home> //Classe que representa o estado
                 keyboardType: TextInputType.number,
                 decoration:InputDecoration(
                   labelText: "Altura(cm)",
-                  
+                  labelStyle: TextStyle(color: Colors.green),
                 ),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.green, fontSize:25.0),
+                controller: _alturaController,
+                validator:(value){
+                  if(value == null || value.isEmpty){
+                    return "Insira sua alutra";
+                  }
+                }
               ),
+              Padding(
+                padding:EdgeInsets.only(top:10.0, bottom: 10.0),
+                child: Container(
+                  height: 50.0,
+                  child: ElevatedButton(
+                    onPressed: (){
+                      if(_formKey.currentState!.validate()) //Verifica se o formulario é valido
+                      {
+                        _calcular();
+                      }
+                    },
+                    child: Text(
+                      "Calcular",
+                      style: TextStyle(color: Colors.white, fontSize:25.0),
+                    ),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  ),
+                ),
+              )
             ],
           )
         )
