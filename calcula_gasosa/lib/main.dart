@@ -8,10 +8,16 @@ class CalculadoraCombustivelApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // Remove a faixa de debug
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: CalculadoraCombustivel(),
     );
   }
 }
+
 class CalculadoraCombustivel extends StatefulWidget {
   @override
   _CalculadoraCombustivelState createState() => _CalculadoraCombustivelState();
@@ -27,15 +33,11 @@ class _CalculadoraCombustivelState extends State<CalculadoraCombustivel> {
       double precoAlcool = double.parse(precoAlcoolController.text);
       double precoGasolina = double.parse(precoGasolinaController.text);
 
-      if (precoAlcool == null || precoGasolina == null) {
-        resultado = "Por favor, insira valores válidos.";
+      double razao = precoAlcool / precoGasolina;
+      if (razao < 0.7) {
+        resultado = "Abasteça com Álcool";
       } else {
-        double razao = precoAlcool / precoGasolina;
-        if (razao < 0.7) {
-          resultado = "Abasteça com Álcool";
-        } else {
-          resultado = "Abasteça com Gasolina";
-        }
+        resultado = "Abasteça com Gasolina";
       }
     });
   }
@@ -57,16 +59,26 @@ class _CalculadoraCombustivelState extends State<CalculadoraCombustivel> {
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
               controller: precoAlcoolController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              decoration: InputDecoration(labelText: "Preço do Álcool"),
+              decoration: InputDecoration(
+                labelText: "Preço do Álcool",
+                border: OutlineInputBorder(),
+              ),
+              style: TextStyle(fontSize: 18),
             ),
+            SizedBox(height: 20),
             TextField(
               controller: precoGasolinaController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              decoration: InputDecoration(labelText: "Preço da Gasolina"),
+              decoration: InputDecoration(
+                labelText: "Preço da Gasolina",
+                border: OutlineInputBorder(),
+              ),
+              style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 20),
             Row(
@@ -74,16 +86,31 @@ class _CalculadoraCombustivelState extends State<CalculadoraCombustivel> {
               children: [
                 ElevatedButton(
                   onPressed: calcular,
-                  child: Text("Calcular"),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  ),
+                  child: Text("Calcular", style: TextStyle(fontSize: 18)),
                 ),
                 ElevatedButton(
                   onPressed: limparCampos,
-                  child: Text("Limpar"),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    backgroundColor: Colors.redAccent,
+                  ),
+                  child: Text("Limpar", style: TextStyle(fontSize: 18)),
                 ),
               ],
             ),
             SizedBox(height: 20),
-            Text(resultado, style: TextStyle(fontSize: 24)),
+            Text(
+              resultado,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.teal,
+              ),
+            ),
           ],
         ),
       ),
